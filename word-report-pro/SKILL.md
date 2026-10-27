@@ -5,7 +5,8 @@ description: >-
   Word document, official report, administrative document, meeting minutes,
   project proposal, or any structured Vietnamese professional document.
   Also use when the user needs help with document structure, formatting
-  standards, or converting text into a properly formatted report.
+  standards, structural & redundancy auditing (MECE check), or converting
+  text into a properly formatted report.
 ---
 
 # Word Report Pro
@@ -53,14 +54,21 @@ Load the appropriate template from `./resources/templates/`.
 Fill in all placeholder fields marked with `[[ ]]`.
 Follow the structure strictly — do NOT skip sections.
 
-### Step 4 – Apply Formatting Rules
+### Step 4 – Structural & Redundancy Audit (MECE Principle)
+Before finalizing the document, run the structural audit from `./resources/structural-audit.md`:
+1. **Scope Boundary Check:** Ensure sections do not bleed into each other (e.g., Introduction must not reveal detailed conclusions; Solutions must not re-explain the problem).
+2. **De-duplicate Semantic Overlaps:** Check if adjacent sub-sections or chapters repeat the same core argument with different wording. Merge or refer back instead of re-stating.
+3. **Volume Balance:** Ensure ~10-15% Intro, ~35-40% Findings/Body, ~35-40% Analysis/Solutions, ~10% Conclusion.
+4. **No Conclusion Echoing:** The conclusion must provide synthesis and forward-looking decisions, NOT a copy-paste of the introduction.
+
+### Step 5 – Apply Formatting Rules
 - Use `./resources/formatting-guide.md` for detailed rules
 - Number all sections (1., 1.1., 1.1.1.)
 - Tables must have headers and borders
 - Figures/images must have captions below them
-- Page numbers in footer (right-aligned)
+- Page numbers in footer (or top-center per decree)
 
-### Step 5 – Generate Output
+### Step 6 – Generate Output
 - Default: Output as **formatted Markdown** that mirrors Word layout
 - If user has Python + python-docx: run `./scripts/generate_docx.py`
 - Always end with a summary of what was created
