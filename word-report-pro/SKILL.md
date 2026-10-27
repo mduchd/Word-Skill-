@@ -6,32 +6,33 @@ description: >-
   project proposal, or any structured Vietnamese professional document.
   Also use when the user needs help with document structure, formatting
   standards, structural & redundancy auditing (MECE check), citation rules,
-  or converting Markdown into a properly formatted .docx file.
+  strict 100% Times New Roman font enforcement, table styling rules
+  (no background colors, no bold body text), or converting Markdown into .docx.
 ---
 
 # Word Report Pro
 
 Skill for creating professional Vietnamese Word documents and reports following
-Vietnamese administrative and academic formatting standards.
+Vietnamese administrative (Nghị định 30/2020/NĐ-CP) and academic formatting standards.
 
-## Core Formatting Standards (Vietnamese)
+## ⚠️ NON-NEGOTIABLE CORE RULES (QUY TẮC BẮT BUỘC)
 
-Based on Nghị định 30/2020/NĐ-CP:
+1. **100% Phông Chữ Times New Roman Cho Toàn Bộ Tài Liệu:**
+   - Mọi thành phần: Trang bìa, Tiêu đề (H1, H2, H3), Thân bài, Bảng biểu, Chú thích hình/bảng, Đầu trang, Chân trang, Số trang, Chữ ký... **100% bắt buộc là Times New Roman**.
+   - Tuyệt đối không để sót phông chữ mặc định của Word (Calibri, Aptos, Arial).
 
-| Property | Value |
-|---|---|
-| Font | Times New Roman |
-| Body size | 13pt |
-| Heading 1 | 14pt, Bold, ALL CAPS |
-| Heading 2 | 13pt, Bold |
-| Heading 3 | 13pt, Bold, Italic |
-| Line spacing | 1.3 – 1.5 |
-| Margin Top | 2.0 cm |
-| Margin Bottom | 2.0 cm |
-| Margin Left | 3.0 cm |
-| Margin Right | 2.0 cm |
-| Page size | A4 |
-| Paragraph indent | 1.27 cm (first line) |
+2. **Quy Tắc Bảng Biểu (Strict Table Rules):**
+   - **NỀN TRẮNG 100% (No Shading):** Tuyệt đối KHÔNG tô màu xám, xanh, vàng hay bất kỳ màu nền nào trong bảng để tránh bị đen kịt hoặc mờ chữ khi in ấn/photo/ký số.
+   - **KHÔNG IN ĐẬM NỘI DUNG TRONG BẢNG:**
+     - Hàng tiêu đề cột: In đậm, căn giữa.
+     - Các hàng dữ liệu bên trong: **Chữ thường đứng, KHÔNG in đậm**.
+     - Ngoại lệ duy nhất: Hàng **TỔNG CỘNG** hoặc **TỔNG SỐ** ở cuối bảng được phép in đậm.
+   - Cỡ chữ trong bảng: **11pt – 12pt** (nhỏ hơn thân bài 1-2 cỡ để bảng gọn gàng).
+   - Căn lề trong bảng: Cột số căn phải, cột chữ căn trái, cột STT căn giữa.
+
+3. **Căn Lề Đoạn Văn:** Thân bài luôn căn đều 2 bên (**Justified**), thụt đầu dòng **1.27 cm**, giãn dòng 1.3 – 1.5 line.
+
+---
 
 ## Workflow
 
@@ -57,17 +58,17 @@ Follow the structure strictly — do NOT skip sections.
 
 ### Step 4 – Structural & Redundancy Audit (MECE Principle)
 Before finalizing the document, run the structural audit from `./resources/structural-audit.md`:
-1. **Scope Boundary Check:** Ensure sections do not bleed into each other (e.g., Introduction must not reveal detailed conclusions; Solutions must not re-explain the problem).
-2. **De-duplicate Semantic Overlaps:** Check if adjacent sub-sections or chapters repeat the same core argument with different wording. Merge or refer back instead of re-stating.
+1. **Scope Boundary Check:** Ensure sections do not bleed into each other.
+2. **De-duplicate Semantic Overlaps:** Merge or refer back instead of re-stating duplicate arguments.
 3. **Volume Balance:** Ensure ~10-15% Intro, ~35-40% Findings/Body, ~35-40% Analysis/Solutions, ~10% Conclusion.
 4. **No Conclusion Echoing:** The conclusion must provide synthesis and forward-looking decisions, NOT a copy-paste of the introduction.
 
 ### Step 5 – Apply Formatting Rules
-- Use `./resources/formatting-guide.md` for detailed rules
-- Number all sections (1., 1.1., 1.1.1.)
-- Tables must have headers and borders (cantSplit, tblHeader)
-- Figures/images must have captions below them
-- Page numbers start on page 2, placed at top-center per Nghị định 30/2020
+- Follow `./resources/formatting-guide.md` strictly:
+  - 100% Times New Roman.
+  - Table: No background colors, no bold body text, 11pt.
+  - Headings: H1 (14pt, Bold, ALL CAPS), H2 (13pt, Bold), H3 (13pt, Bold Italic).
+  - Page numbers start on page 2, placed at top-center per Nghị định 30/2020.
 
 ### Step 6 – Generate Output
 - Default: Output as **formatted Markdown** that mirrors Word layout
