@@ -1,11 +1,12 @@
 """
-analyze_text.py (Bản Nâng Cấp: Quét Chỉ Số & Ký Tự Cấm AI)
-──────────────────────────────────────────────────────────
+analyze_text.py (Bản Nâng Cấp Toàn Diện: Quét Chỉ Số, Ký Tự Cấm, Cliché & PR Tone)
+────────────────────────────────────────────────────────────────────────────────
 Phân tích văn bản (tiếng Việt & tiếng Anh) để đo lường các chỉ số AI Detection:
 - Độ biến thiên độ dài câu (Burstiness score / Standard Deviation)
 - Tỷ lệ câu Ngắn - Trung bình - Dài (so với chuẩn 30-50-20)
 - Mật độ từ cấm AI (Transition words, AI vocabulary)
 - QUÉT CÁC KÝ TỰ CẤM CỦA AI: Emoji, Dấu gạch ngang Em Dash (—), In đậm lắt nhắt (**...**), Ký tự mũi tên (→, =>)
+- QUÉT CÂU MỞ ĐẦU RẬP KHUÔN & GIỌNG ĐIỆU PR (Theo COHOTECH): "Bạn đã bao giờ...", "Bước tiến vượt bậc...", "Đột phá mang tính cách mạng..."
 - Đánh giá chỉ số rủi ro phát hiện AI (AI Risk Index: 0% - 100%)
 
 Cách dùng:
@@ -40,6 +41,14 @@ AI_PATTERNS_EN = [
     r"\brobust\b", r"\bleverage\b", r"\bcomprehensive\b", r"\butilize\b",
     r"\bpivotal\b", r"\bfoster\b", r"\btestament\b", r"\bin today's world\b",
     r"\bit is important to\b", r"\bin conclusion\b", r"\bstreamline\b"
+]
+
+# Câu mở đầu rập khuôn & Giọng điệu PR quảng cáo quá đà (COHOTECH)
+AI_CLICHES_AND_PR = [
+    r"\bbạn đã bao giờ\b", r"\bbạn có biết rằng\b", r"\bhãy tưởng tượng\b",
+    r"\bliệu bạn có\b", r"\bhave you ever\b", r"\bimagine a world\b",
+    r"\bbước tiến vượt bậc\b", r"\bvô cùng tuyệt vời\b", r"\bvô vàn lợi ích\b",
+    r"\bđột phá mang tính cách mạng\b", r"\bcơ hội tuyệt vời\b"
 ]
 
 
@@ -81,16 +90,24 @@ def analyze_burstiness(sentences: list[str]) -> dict:
     }
 
 
-def find_ai_keywords(text: str) -> dict:
-    """Quét các từ khóa có nguy cơ bị detector bắt."""
+def find_ai_keywords(text: str) -> tuple[dict, dict]:
+    """Quét các từ khóa từ nối và các cụm từ PR/cliché."""
     lower_text = text.lower()
-    matches = {}
+    matches_kw = {}
     for pat in AI_PATTERNS_VI + AI_PATTERNS_EN:
         found = re.findall(pat, lower_text)
         if found:
             word = pat.replace(r"\b", "")
-            matches[word] = len(found)
-    return matches
+            matches_kw[word] = len(found)
+
+    matches_pr = {}
+    for pat in AI_CLICHES_AND_PR:
+        found = re.findall(pat, lower_text)
+        if found:
+            phrase = pat.replace(r"\b", "")
+            matches_pr[phrase] = len(found)
+
+    return matches_kw, matches_pr
 
 
 def find_ai_symbols(text: str) -> dict:
@@ -125,7 +142,7 @@ def find_ai_symbols(text: str) -> dict:
     return symbols_found
 
 
-def calculate_risk(burst: dict, keywords: dict, symbols: dict, total_words: int) -> tuple[int, list[str]]:
+def calculate_risk(burst: dict, keywords: dict, pr_cliches: dict, symbols: dict, total_words: int) -> tuple[int, list[str]]:
     """Tính điểm rủi ro AI (0% - 100%) và đưa ra cảnh báo."""
     risk = 0
     feedback = []
@@ -155,7 +172,12 @@ def calculate_risk(burst: dict, keywords: dict, symbols: dict, total_words: int)
         risk += 15
         feedback.append(f"[*] Xuất hiện nhiều từ nối/từ vựng AI đặc trưng ({round(density, 2)}%).")
 
-    # 4. Đánh giá Ký tự cấm AI
+    # 4. Mở đầu rập khuôn & Giọng điệu PR quảng cáo (COHOTECH)
+    if pr_cliches:
+        risk += 20
+        feedback.append(f"[CẢNH BÁO] Phát hiện câu mở đầu rập khuôn hoặc giọng điệu PR thái quá: {list(pr_cliches.keys())}. Cần hạ nhiệt giọng văn, viết điềm tĩnh và thực tế.")
+
+    # 5. Đánh giá Ký tự cấm AI
     if "Emoji" in symbols:
         risk += 30
         feedback.append(f"[NGHIÊM TRỌNG] Phát hiện {symbols['Emoji']} emoji trong văn bản. Báo cáo học thuật/công vụ tuyệt đối KHÔNG dùng emoji!")
@@ -193,12 +215,12 @@ def main():
         sys.exit(0)
 
     burst = analyze_burstiness(sentences)
-    keywords = find_ai_keywords(text)
+    keywords, pr_cliches = find_ai_keywords(text)
     symbols = find_ai_symbols(text)
-    risk, feedback = calculate_risk(burst, keywords, symbols, len(words))
+    risk, feedback = calculate_risk(burst, keywords, pr_cliches, symbols, len(words))
 
     print("\n" + "=" * 60)
-    print(" KẾT QUẢ PHÂN TÍCH CHỈ SỐ AI DETECTION & KÝ TỰ CẤM")
+    print(" KẾT QUẢ PHÂN TÍCH CHỈ SỐ AI DETECTION, KÝ TỰ & PR TONE")
     print("=" * 60)
     print(f"  Tổng số từ: {len(words)} từ | Tổng số câu: {len(sentences)} câu")
     print(f"  Độ dài câu trung bình: {burst['avg']} từ/câu")
@@ -214,6 +236,11 @@ def main():
     else:
         print("   [OK] Không phát hiện từ khóa AI đặc trưng.")
 
+    if pr_cliches:
+        print("\n CÂU MỞ ĐẦU RẬP KHUÔN / GIỌNG ĐIỆU PR PHÁT HIỆN:")
+        for w, count in pr_cliches.items():
+            print(f"   - '{w}': xuất hiện {count} lần")
+
     print("\n KÝ TỰ & DẤU CÂU CẤM ĐƯỢC PHÁT HIỆN:")
     if symbols:
         for s, count in symbols.items():
@@ -224,11 +251,11 @@ def main():
     print("\n" + "-" * 60)
     print(f" CHỈ SỐ RỦI RO BỊ AI DETECTOR PHÁT HIỆN: {risk}%")
     if risk >= 60:
-        print("   [NGUY CƠ CAO] - Cần dọn dẹp ký tự cấm và viết lại theo chiến lược Full Paraphrase.")
+        print("   [NGUY CƠ CAO] - Cần dọn dẹp ký tự cấm, hạ nhiệt giọng văn và rewrite.")
     elif risk >= 35:
-        print("   [NGUY CƠ TRUNG BÌNH] - Nên xóa các ký tự thừa, chỉnh sửa các câu nối và đan xen câu ngắn.")
+        print("   [NGUY CƠ TRUNG BÌNH] - Nên xóa các câu sáo rỗng, chỉnh sửa các câu nối và đan xen câu ngắn.")
     else:
-        print("   [AN TOÀN] - Văn phong tự nhiên, perplexity, burstiness & ký tự đạt chuẩn.")
+        print("   [AN TOÀN] - Văn phong tự nhiên, điềm tĩnh, perplexity, burstiness & ký tự đạt chuẩn.")
 
     print("\n KHUYẾN NGHỊ CHỈNH SỬA:")
     for fb in feedback:
