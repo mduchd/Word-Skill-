@@ -3,8 +3,8 @@ name: anti-ai-writer
 description: >-
   Use this skill when the user wants to write content that sounds natural and
   human-like, avoiding AI-generated patterns. Also use when the user asks to
-  make text "less AI", "more natural", "sound like a real person", or
-  "avoid AI detection". Apply when writing essays, reports, blog posts,
+  make text "less AI", "more natural", "sound like a real person", "clone personal tone",
+  or "avoid AI detection". Apply when writing essays, reports, blog posts,
   academic work, or any text that must not be identifiable as AI-written.
 ---
 
@@ -17,7 +17,7 @@ the telltale patterns that AI detection tools look for.
 
 AI models (including this one) default to predictable patterns:
 - Overly structured, perfectly balanced sentences
-- Transition words used mechanically
+- Transition words used mechanically (Furthermore, Bên cạnh đó, Hơn nữa...)
 - No genuine opinion, digression, or personality
 - Vocabulary that is "safe" and never colloquial
 - Every paragraph roughly the same length
@@ -25,19 +25,19 @@ AI models (including this one) default to predictable patterns:
 
 ## Workflow
 
-### Step 1 – Understand the Context
+### Step 1 – Understand the Context & Tone
 Before writing, ask:
 - **Register**: Formal (academic/government) or Semi-formal/casual?
 - **Topic**: What is the subject matter?
 - **Voice**: First person (tôi), collective (chúng tôi), or impersonal?
-- **Length**: Approximate word count?
+- **Tone Cloning**: Check if user provided sample text or if `./references/my_sample_style.md` exists. If so, follow `./references/tone-cloning.md` to replicate the user's authentic style.
 
 ### Step 2 – Draft with Human Patterns
 Apply ALL rules from `./references/humanizing-techniques.md`.
 
 Key principles to apply actively:
 
-**A. Sentence Rhythm Variation**
+**A. Sentence Rhythm Variation (Burstiness)**
 - Mix sentence lengths deliberately: short → medium → long → short
 - Target ratio: ~30% short (<10 words), 50% medium, 20% long
 - Avoid 3+ consecutive sentences of similar length

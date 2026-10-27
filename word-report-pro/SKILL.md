@@ -2,11 +2,11 @@
 name: word-report-pro
 description: >-
   Use this skill when the user asks to write, draft, format, or generate a
-  Word document, official report, administrative document, meeting minutes,
+  Word document, official report, thesis, administrative proposal, meeting minutes,
   project proposal, or any structured Vietnamese professional document.
   Also use when the user needs help with document structure, formatting
-  standards, structural & redundancy auditing (MECE check), or converting
-  text into a properly formatted report.
+  standards, structural & redundancy auditing (MECE check), citation rules,
+  or converting Markdown into a properly formatted .docx file.
 ---
 
 # Word Report Pro
@@ -37,17 +37,18 @@ Based on Nghị định 30/2020/NĐ-CP:
 
 ### Step 1 – Identify Document Type
 Ask the user which type they need if not specified:
+- **Khóa luận tốt nghiệp / Đề tài NCKH** → use `templates/khoa-luan-tot-nghiep.md`
+- **Tờ trình hành chính (Chủ trương / Kinh phí)** → use `templates/to-trinh.md`
 - **Báo cáo tổng hợp** (Summary Report) → use `templates/bao-cao-tong-hop.md`
 - **Biên bản họp** (Meeting Minutes) → use `templates/bien-ban-hop.md`
 - **Thuyết minh dự án** (Project Proposal) → use `templates/thuyet-minh-du-an.md`
-- **Công văn** (Official Letter) → use `templates/cong-van.md`
-- **Tiểu luận / Luận văn** (Essay / Thesis) → use `templates/tieu-luan.md`
 
-### Step 2 – Gather Content
+### Step 2 – Gather Content & Verify Citations
 Collect from the user:
 - Document title, issuing unit/author, date
 - Main content sections and key points
-- Any data, figures, or tables to include
+- Data, figures, or tables to include
+- Check `resources/citation-guide.md`: NEVER hallucinate fake author citations or fabricated statistics. Use explicit placeholders if sources are unknown.
 
 ### Step 3 – Draft with Template
 Load the appropriate template from `./resources/templates/`.
@@ -64,18 +65,11 @@ Before finalizing the document, run the structural audit from `./resources/struc
 ### Step 5 – Apply Formatting Rules
 - Use `./resources/formatting-guide.md` for detailed rules
 - Number all sections (1., 1.1., 1.1.1.)
-- Tables must have headers and borders
+- Tables must have headers and borders (cantSplit, tblHeader)
 - Figures/images must have captions below them
-- Page numbers in footer (or top-center per decree)
+- Page numbers start on page 2, placed at top-center per Nghị định 30/2020
 
 ### Step 6 – Generate Output
 - Default: Output as **formatted Markdown** that mirrors Word layout
 - If user has Python + python-docx: run `./scripts/generate_docx.py`
 - Always end with a summary of what was created
-
-## Key Rules
-- ALWAYS write in Vietnamese unless user requests otherwise
-- NEVER use bullet points for formal sections — use numbered headings
-- ALWAYS include: cover page info, table of contents placeholder, conclusion
-- Date format: ngày DD tháng MM năm YYYY
-- Signature block goes bottom-right, name centered below the title

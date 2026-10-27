@@ -2,17 +2,17 @@
 name: ai-detection-bypass
 description: >-
   Use this skill when the user wants to check if text looks AI-generated,
-  or wants to rewrite/edit existing text to reduce AI detection scores.
-  Activate when the user says "tránh AI", "bypass AI detector", "kiểm tra
-  AI", "chỉnh văn bản tránh bị phát hiện", or wants to pass tools like
+  measure perplexity/burstiness stats, or rewrite/edit existing text to reduce
+  AI detection scores. Activate when the user says "tránh AI", "bypass AI detector",
+  "kiểm tra AI", "chỉnh văn bản tránh bị phát hiện", or wants to pass tools like
   GPTZero, Turnitin AI, Copyleaks, or ZeroGPT. Works on both Vietnamese
   and English text.
 ---
 
 # AI Detection Bypass
 
-Skill for analyzing text for AI-detection signals and systematically
-rewriting it to read as naturally human-written.
+Skill for analyzing text for AI-detection signals, calculating quantitative
+risk scores, and systematically rewriting it to read as naturally human-written.
 
 ## How AI Detectors Work (Brief)
 
@@ -26,22 +26,23 @@ Most detectors (GPTZero, Turnitin, ZeroGPT, Copyleaks) measure:
 
 ## Workflow
 
-### Step 1 — Analyze the Text
+### Step 1 — Analyze the Text (Quantitative & Qualitative)
 
-Read the submitted text and mentally score it on:
+Run quantitative analysis if Python script is available:
+`python ./scripts/analyze_text.py <file>`
+This measures:
+- Sentence length standard deviation (Burstiness score)
+- Ratio of short/medium/long sentences
+- AI transition word density
+- Calculated Risk Index (0 - 100%)
 
-| Signal | What to look for | Risk |
-|---|---|---|
-| Transition words | Furthermore, Additionally, Moreover, Bên cạnh đó... | 🔴 High |
-| Sentence length variance | All similar length = AI | 🔴 High |
-| Parallel structure | "Thứ nhất... Thứ hai... Thứ ba..." | 🔴 High |
-| Generic vocabulary | "important", "significant", "comprehensive" | 🟡 Medium |
-| Missing specifics | No names, dates, real numbers | 🟡 Medium |
-| Passive voice overuse | "It was found that...", "Được xác định là..." | 🟡 Medium |
-| Zero subjectivity | No opinion, no uncertainty expressed | 🟡 Medium |
-| Perfect paragraph structure | Topic → Body → Conclusion every time | 🟢 Low-Med |
+Or qualitatively inspect:
+- Transition words: Furthermore, Additionally, Bên cạnh đó, Hơn nữa...
+- Flat sentence lengths (all sentences 15-20 words)
+- Parallel enumeration ("Thứ nhất... Thứ hai... Thứ ba...")
+- Generic vocabulary without concrete figures/dates
 
-Report estimated risk level: **Low / Medium / High / Very High**
+Report estimated risk level: **Low (<30%) / Medium (30-60%) / High (60-80%) / Very High (>80%)**
 
 ### Step 2 — Choose Rewrite Strategy
 
@@ -79,16 +80,9 @@ While rewriting, apply these transformations:
 
 ### Step 4 — Run Self-Checklist
 
-Use `./scripts/checklist.md` to verify before outputting.
+Use `./scripts/checklist.md` (22 criteria) to verify before outputting.
 
 ### Step 5 — Output
 
 Present the rewritten text clearly. If significant changes were made,
 briefly note what was changed and why (1–2 sentences max).
-
-## Important Constraints
-
-- **NEVER change factual content** — only change how facts are expressed
-- **NEVER introduce false information** to seem more "human"
-- **Preserve the user's intended meaning** at all times
-- If the user provides citations/sources, keep them exactly as-is
