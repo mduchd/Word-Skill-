@@ -1,5 +1,5 @@
 # Hướng Dẫn Định Dạng Báo Cáo & Luận Văn Tốt Nghiệp Chuẩn Quốc Gia
-*(Tham chiếu tổng hợp từ Nghị định 30/2020/NĐ-CP và Quy chuẩn định dạng Luận văn – ĐH Thái Nguyên / ĐHQG)*
+*(Tham chiếu tổng hợp từ Nghị định 30/2020/NĐ-CP, Quy chuẩn ĐH Thái Nguyên & Blog Dạy Tin Học)*
 
 ---
 
@@ -35,9 +35,27 @@ Trước khi gõ văn bản trên Microsoft Word, cần thiết lập môi trư�
 
 ---
 
-## 📑 PHẦN 3: BẬT NGẮT TRANG ĐẦU CHƯƠNG & CHỐNG "TIÊU ĐỀ MỒ CÔI"
+## 🎨 PHẦN 3: KỸ THUẬT TẠO TRANG BÌA CHÍNH & BÌA PHỤ (PAGE BORDER)
 
-Trong các luận văn chuẩn (như hướng dẫn ĐH Thái Nguyên):
+Báo cáo tốt nghiệp chuẩn luôn có **2 trang bìa**:
+1. **Bìa chính (Bìa ngoài):** In trên giấy cứng màu (xanh, đỏ hoặc vàng kim), có khung viền trang bìa mỹ thuật bao quanh.
+2. **Bìa phụ (Bìa trong):** Đặt ngay sau bìa chính, in trên giấy A4 trắng thường, cùng nội dung với bìa chính.
+
+### Cách tạo khung viền trang bìa chuẩn không bị lệch khi in:
+- Vào thẻ `Design` (hoặc `Page Layout` trên Word cũ) > Chọn **Page Borders**.
+- Tại tab *Page Border*:
+  - **Setting:** Chọn **Box**.
+  - **Style / Art:** Chọn kiểu viền đôi hoặc viền góc nghệ thuật nhã nhặn.
+  - **Apply to:** Chọn **This section - First page only** *(Cực kỳ quan trọng: chỉ áp dụng viền cho trang bìa đầu tiên, không làm viền lan sang các trang ruột nội dung!)*.
+  - Bấm vào nút **Options...** góc dưới bên phải:
+    - Tại mục *Measure from:* Đổi từ `Edge of page` sang **Text**.
+    - Bỏ tích các ô *Surround header*, *Surround footer*.
+    - Bấm **OK**. Cách này giúp khung viền tự bám sát theo lề chữ (trái 3cm, phải 1.5cm), đóng gáy không bao giờ bị dập vào đường viền!
+
+---
+
+## 📑 PHẦN 4: BẬT NGẮT TRANG ĐẦU CHƯƠNG & CHỐNG "TIÊU ĐỀ MỒ CÔI"
+
 1. **Tự động ngắt trang trước mỗi Chương (`Page break before`):**
    - Các phần lớn: *Lời mở đầu, Danh mục tài liệu tham khảo, Phụ lục* và *Mỗi Chương (Chương 1, Chương 2...)* **luôn luôn phải bắt đầu ở đầu một trang mới**.
    - Cài đặt trong Word: Chuột phải vào Style `Heading 1` > `Modify` > `Format` > `Paragraph` > Thẻ `Line and Page Breaks` > Tích chọn **Page break before**.
@@ -47,7 +65,7 @@ Trong các luận văn chuẩn (như hướng dẫn ĐH Thái Nguyên):
 
 ---
 
-## 🔢 PHẦN 4: HỆ THỐNG ĐÁNH SỐ TRANG 2 PHÂN VÙNG (DUAL NUMBERING)
+## 🔢 PHẦN 5: HỆ THỐNG ĐÁNH SỐ TRANG 2 PHÂN VÙNG (DUAL NUMBERING)
 
 Khóa luận / Đề tài chuẩn bắt buộc phải chia làm **2 Section** (phân vùng):
 
@@ -61,21 +79,22 @@ Khóa luận / Đề tài chuẩn bắt buộc phải chia làm **2 Section** (p
 
 ---
 
-## 📊 PHẦN 5: QUY TẮC BẢNG BIỂU & HÌNH VẼ NGHIÊM NGẶT
+## 📊 PHẦN 6: MỤC LỤC BẢNG BIỂU & HÌNH ẢNH TỰ ĐỘNG (TABLE OF FIGURES)
 
-1. **Bảng biểu:**
-   - **NỀN TRẮNG 100%:** Tuyệt đối KHÔNG tô màu xám/xanh vào hàng hoặc ô bảng.
-   - **KHÔNG IN ĐẬM DỮ LIỆU:** Chỉ in đậm hàng tiêu đề cột hoặc hàng Tổng cộng. Toàn bộ số liệu và chữ bên trong là chữ thường đứng.
-   - **Cỡ chữ trong bảng:** `11 pt – 12 pt`.
-   - **Tên Bảng:** Đặt **TRÊN** bảng, căn trái, in nghiêng (VD: *Bảng 2.1. Thống kê kết quả khảo sát*).
-   - **Lặp lại tiêu đề:** Phải bật tính năng *Repeat Header Rows* (`tblHeader`) để khi bảng kéo dài sang trang 2, dòng tiêu đề cột tự động lặp lại.
-2. **Hình ảnh / Biểu đồ:**
-   - Hình ảnh căn giữa trang.
-   - **Tên Hình:** Đặt **DƯỚI** hình, căn giữa, in nghiêng (VD: *Hình 1.2. Sơ đồ kiến trúc hệ thống*).
+Thay vì gõ số trang bảng biểu/hình ảnh bằng tay (khi bài viết sửa đổi sẽ bị lệch số trang):
+1. **Gán nhãn tự động cho Hình & Bảng:**
+   - Chuột phải vào Hình hoặc Bảng > Chọn **Insert Caption...**
+   - Tại ô *Label:* Chọn nhãn `Bảng` hoặc `Hình` (nếu chưa có thì bấm *New Label* tạo nhãn mới).
+   - Chọn *Position:* `Above selected item` (với Bảng) hoặc `Below selected item` (với Hình).
+2. **Xuất Danh mục tự động:**
+   - Đặt con trỏ dưới tiêu đề *DANH MỤC CÁC BẢNG BIỂU* hoặc *DANH MỤC CÁC HÌNH ẢNH*.
+   - Vào thẻ `References` > Chọn **Insert Table of Figures** > Tại *Caption label:* Chọn `Bảng` hoặc `Hình` > Bấm **OK**.
+   - Khi chỉnh sửa nội dung bài, chỉ cần bấm chuột phải vào danh mục > Chọn **Update Field** > `Update entire table` là toàn bộ danh mục tự nhảy số trang chính xác 100%!
 
 ---
 
-## 🔤 PHẦN 6: 100% ĐỒNG BỘ PHÔNG CHỮ TIMES NEW ROMAN
+## 🔤 PHẦN 7: BẢNG BIỂU SẠCH (KHÔNG TÔ MÀU, KHÔNG IN ĐẬM) & 100% TIMES NEW ROMAN
 
-- Toàn bộ tài liệu từ A đến Z (kể cả Header, Footer, Số trang, Chú thích bảng biểu) **100% bắt buộc phải là Times New Roman**.
-- Bộ mã: **Unicode** tiếng Việt chuẩn.
+- **Nền trắng 100%:** Tuyệt đối KHÔNG tô màu xám/xanh vào ô bảng.
+- **Không in đậm dữ liệu:** Chỉ in đậm hàng tiêu đề cột hoặc hàng Tổng cộng. Toàn bộ chữ và số bên trong là chữ thường đứng, cỡ 11–12pt.
+- **Toàn bộ tài liệu:** 100% phông chữ `Times New Roman`, bộ mã Unicode chuẩn.

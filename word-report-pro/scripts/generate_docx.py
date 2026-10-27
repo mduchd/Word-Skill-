@@ -1,13 +1,14 @@
 """
 generate_docx.py (Bản Chuẩn Thể Thức Nhà Nước & Luận Văn Tốt Nghiệp)
 ───────────────────────────────────────────────────────────────────
-Cập nhật theo chuẩn Nghị định 30/2020/NĐ-CP & Quy chuẩn Luận văn (ĐH Thái Nguyên / ĐHQG):
+Cập nhật theo chuẩn Nghị định 30/2020/NĐ-CP & Quy chuẩn Luận văn (ĐH Thái Nguyên / ĐHQG / Blog Dạy Tin Học):
 - CĂN LỀ: Trái 3.0 cm, Phải 1.5 cm, Trên 2.0 cm, Dưới 2.0 cm (Khổ A4 đứng).
 - ĐOẠN VĂN: Căn đều 2 bên (Justified), Giãn dòng 1.5 lines, Spacing Before/After 6pt,
-  Thụt đầu dòng chuẩn 1.0 cm (hoặc 1.27 cm).
-- NGẮT TRANG ĐẦU CHƯƠNG: Tự động ngắt trang trước mỗi Tiêu đề cấp 1 (# CHƯƠNG, # KẾT LUẬN)
-  bằng thuộc tính page_break_before.
+  Thụt đầu dòng chuẩn 1.0 cm.
+- NGẮT TRANG ĐẦU CHƯƠNG: Tự động ngắt trang trước mỗi Tiêu đề cấp 1 (# CHƯƠNG, # KẾT LUẬN).
 - CHỐNG TIÊU ĐỀ MỒ CÔI: Bật keep_with_next cho toàn bộ Heading 1, 2, 3.
+- MỤC LỤC TỰ ĐỘNG: Nhúng mã trường TOC cho Nội dung, Danh mục Bảng biểu ({TOC \c "Bảng"}),
+  Danh mục Hình ảnh ({TOC \c "Hình"}).
 - BẢNG BIỂU:
   + NỀN TRẮNG 100% (KHÔNG tô màu xám/xanh).
   + KHÔNG in đậm dữ liệu (chỉ in đậm tiêu đề hoặc dòng Tổng cộng).
@@ -173,6 +174,20 @@ def add_toc_field(doc: Document):
     p._p.append(fldSimple)
 
 
+def add_tof_field(doc: Document, label: str):
+    """Chèn mã trường Danh mục Bảng biểu hoặc Hình ảnh tự động (Table of Figures)."""
+    p = doc.add_paragraph()
+    p.paragraph_format.first_line_indent = Cm(0)
+    p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    p.paragraph_format.space_after = Pt(12)
+    run = p.add_run(f"DANH MỤC {label.upper()} TỰ ĐỘNG (Bấm chuột phải chọn Update Field để cập nhật số trang)")
+    force_times_new_roman(run, size=11, italic=True, color=RGBColor(0x66, 0x66, 0x66))
+
+    fldSimple = OxmlElement("w:fldSimple")
+    fldSimple.set(qn("w:instr"), f'TOC \\c "{label}" \\h \\z \\u')
+    p._p.append(fldSimple)
+
+
 def format_table_strict(table):
     """
     Định dạng bảng nghiêm ngặt:
@@ -307,11 +322,29 @@ def parse_markdown_to_docx(md_text: str, doc: Document):
             i += 1
             continue
 
-        # Mục lục tự động
-        if "MỤC LỤC" in line.upper() and ("(TỰ ĐỘNG" in line.upper() or "TABLE OF CONTENTS" in line.upper()):
+        # Mục lục nội dung tự động
+        if "MỤC LỤC" in line.upper() and ("(TỰ ĐỘNG" in line.upper() or "TABLE OF CONTENTS" in line.upper() or line.strip("# ") == "MỤC LỤC"):
             add_heading(doc, "MỤC LỤC", 1, is_first_heading=(not first_h1_passed))
             first_h1_passed = True
             add_toc_field(doc)
+            i += 1
+            continue
+
+        # Danh mục Bảng biểu tự động ({TOC \c "Bảng"})
+        if "DANH MỤC" in line.upper() and "BẢNG" in line.upper():
+            title = line.strip("#* ")
+            add_heading(doc, title, 1, is_first_heading=(not first_h1_passed))
+            first_h1_passed = True
+            add_tof_field(doc, label="Bảng")
+            i += 1
+            continue
+
+        # Danh mục Hình ảnh tự động ({TOC \c "Hình"})
+        if "DANH MỤC" in line.upper() and ("HÌNH" in line.upper() or "BIỂU ĐỒ" in line.upper()):
+            title = line.strip("#* ")
+            add_heading(doc, title, 1, is_first_heading=(not first_h1_passed))
+            first_h1_passed = True
+            add_tof_field(doc, label="Hình")
             i += 1
             continue
 
