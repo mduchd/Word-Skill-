@@ -1,96 +1,81 @@
-# Hướng Dẫn Định Dạng Văn Bản Hành Chính & Báo Cáo Chuẩn Việt Nam
+# Hướng Dẫn Định Dạng Báo Cáo & Luận Văn Tốt Nghiệp Chuẩn Quốc Gia
+*(Tham chiếu tổng hợp từ Nghị định 30/2020/NĐ-CP và Quy chuẩn định dạng Luận văn – ĐH Thái Nguyên / ĐHQG)*
 
 ---
 
-## ⚠️ QUY TẮC CỐT LÕI BẮT BUỘC (MANG TÍNH TIÊN QUYẾT)
+## 🛠️ PHẦN 1: CÀI ĐẶT MÔI TRƯỜNG TRƯỚC KHI SOẠN THẢO (BẮT BUỘC)
 
-### 1. Đồng Bộ 100% Phông Chữ Times New Roman
-- **TUYỆT ĐỐI TOÀN BỘ VĂN BẢN** từ trang bìa, tiêu đề, nội dung thân bài, bảng biểu, chú thích hình/bảng, đầu trang (Header), chân trang (Footer), số trang, tài liệu tham khảo... **100% đều phải là phông chữ Times New Roman**.
-- **Không được để sót bất kỳ chữ nào** mang phông mặc định của Word (như *Calibri, Aptos, Arial*).
-- Bộ mã ký tự: **Unicode** chuẩn tiếng Việt dựng sẵn.
-
-### 2. Quy Tắc Bảng Biểu Chuẩn (KHÔNG Tô Màu, KHÔNG In Đậm Nội Dung)
-Theo đúng quy chuẩn thể thức văn bản hành chính Việt Nam (Nghị định 30/2020/NĐ-CP) và chuẩn in ấn học thuật:
-- **KHÔNG ĐƯỢC TÔ MÀU NỀN (No Shading / 100% Nền Trắng):**
-  - Tuyệt đối không tô màu xám, xanh, vàng hay bất kỳ màu nào vào hàng tiêu đề hoặc ô bảng.
-  - Lý do: Khi photo, in đen trắng hoặc ký số công vụ, nền có màu sẽ bị đen kịt, làm mờ chữ và sai thể thức hành chính Nhà nước.
-- **QUY ĐỊNH IN ĐẬM TRONG BẢNG:**
-  - **Hàng tiêu đề cột (Header row):** In đậm, căn giữa.
-  - **Toàn bộ các hàng dữ liệu bên trong:** **TUYỆT ĐỐI KHÔNG IN ĐẬM** (phải là chữ thường, kiểu đứng).
-  - *Ngoại lệ duy nhất:* Hàng **"TỔNG CỘNG"** hoặc **"TỔNG SỐ"** ở cuối bảng được phép in đậm.
-- **CỠ CHỮ TRONG BẢNG:** Từ **11pt đến 12pt** (nhỏ hơn nội dung thân bài 1–2 cỡ để bảng gọn gàng, không bị tràn lề).
-- **VIỀN BẢNG (Borders):** Viền đơn màu đen nét mảnh (0.5pt), không dùng viền màu, viền đôi uốn lượn hay đổ bóng.
+Trước khi gõ văn bản trên Microsoft Word, cần thiết lập môi trường để chống lỗi mất bài và sai số đo:
+1. **Đổi đơn vị đo sang Centimeters (`cm`):**
+   - Vào `File` > `Options` > `Advanced` > cuộn xuống mục **Display** > tại dòng *Show measurements in units of* chọn **Centimeters**.
+2. **Bật thước kẻ căn chỉnh (Ruler):**
+   - Vào thẻ `View` > tích chọn ô **Ruler** để thanh thước xuất hiện ở lề trên và lề trái.
+3. **Cài đặt tự động lưu bài (AutoSave 1 phút):**
+   - Vào `File` > `Options` > `Save` > tích chọn *Save AutoRecover information every* > đổi thành **1 minutes** (tránh rủi ro sập nguồn, treo máy làm mất bài).
 
 ---
 
-## 3. Khổ Giấy Và Lề Trang (Khổ A4)
+## 📐 PHẦN 2: THÔNG SỐ TRANG IN & ĐOẠN VĂN (PAGE SETUP & PARAGRAPH)
 
-| Lề trang | Kích thước chuẩn | Mục đích |
-|---|:---:|---|
-| **Lề trên (Top)** | **2.0 – 2.5 cm** | Thông thoáng đầu trang, đặt số trang (NĐ 30) |
-| **Lề dưới (Bottom)** | **2.0 – 2.5 cm** | Thông thoáng chân trang |
-| **Lề trái (Left)** | **3.0 – 3.5 cm** | Chừa khoảng rộng để bấm gáy / đóng quyển |
-| **Lề phải (Right)** | **1.5 – 2.0 cm** | Tiết kiệm diện tích hiển thị |
+### 1. Căn Lề Trang (Khổ Giấy A4 – Hướng Dọc)
+* **Lề trên (Top):** `2.0 cm`
+* **Lề dưới (Bottom):** `2.0 cm`
+* **Lề trái (Left):** `3.0 cm` *(chừa khoảng rộng để bấm gáy / đóng bìa mạ vàng)*
+* **Lề phải (Right):** `1.5 cm` *(tiết kiệm diện tích hiển thị nội dung)*
 
----
-
-## 4. Phông Chữ & Cỡ Chữ Chi Tiết (Toàn Bộ Times New Roman)
-
-| Thành phần tài liệu | Phông chữ | Cỡ chữ (Size) | Kiểu chữ (Style) | Căn lề |
-|---|---|:---:|---|:---:|
-| **Quốc hiệu (DÒNG 1)** | Times New Roman | 12 – 13 | **In hoa, Đậm** | Giữa |
-| **Tiêu ngữ (DÒNG 2)** | Times New Roman | 13 – 14 | **Chữ hoa chữ cái đầu, Đậm** | Giữa |
-| **Tiêu đề cấp 1 (CHƯƠNG / PHẦN)** | Times New Roman | 14 | **IN HOA, ĐẬM** | Trái / Giữa |
-| **Tiêu đề cấp 2 (Mục lớn)** | Times New Roman | 13 | **In đậm** | Trái |
-| **Tiêu đề cấp 3 (Tiểu mục)** | Times New Roman | 13 | ***In đậm nghiêng*** | Trái |
-| **Tiêu đề cấp 4 (Mục nhỏ)** | Times New Roman | 13 | *In nghiêng* | Trái |
-| **Nội dung thân bài** | Times New Roman | **13** (hoặc 14) | Chữ thường đứng | Căn đều 2 bên (Justified) |
-| **Nội dung trong Bảng biểu** | Times New Roman | **11 – 12** | Thường (chỉ đậm tiêu đề) | Chữ trái / Số phải |
-| **Tên Bảng (đặt TRÊN bảng)** | Times New Roman | 11 – 12 | *In nghiêng* (hoặc đậm nghiêng) | Trái |
-| **Tên Hình (đặt DƯỚI hình)** | Times New Roman | 11 – 12 | *In nghiêng* | Giữa |
-| **Đầu trang / Chân trang** | Times New Roman | 10 – 11 | Chữ thường đứng | Trái / Giữa / Phải |
-| **Số trang** | Times New Roman | 13 – 14 | Chữ thường đứng | Canh giữa lề trên |
+### 2. Định Dạng Đoạn Văn Thân Bài (Normal Style)
+* **Phông chữ:** `Times New Roman` (Unicode dựng sẵn).
+* **Cỡ chữ (Size):** `13 pt` (chuẩn đồng bộ toàn văn bản).
+* **Căn lề (Alignment):** `Justified` (căn đều thẳng cả 2 bên lề).
+* **Thụt đầu dòng đoạn mới (Special Indentation):** `First line: 1.0 cm` (hoặc `1.27 cm`).
+* **Khoảng cách đoạn (Spacing):**
+  * `Before: 6 pt`
+  * `After: 6 pt`
+* **Giãn dòng (Line spacing):** `1.5 lines` (tạo độ thoáng đạt, dễ chấm và phê duyệt).
 
 ---
 
-## 5. Định Dạng Đoạn Văn (Paragraph)
+## 📑 PHẦN 3: BẬT NGẮT TRANG ĐẦU CHƯƠNG & CHỐNG "TIÊU ĐỀ MỒ CÔI"
 
-- **Căn lề đoạn văn:** Căn đều 2 bên (**Justified**).
-- **Thụt đầu dòng:** Đúng **1.27 cm** (tương đương 0.5 inch).
-- **Giãn dòng (Line spacing):** Đặt từ **1.3 đến 1.5 line** (chuẩn đẹp nhất là 1.35 hoặc 1.4).
-- **Khoảng cách trước đoạn (Spacing Before):** **3pt – 6pt**.
-- **Khoảng cách sau đoạn (Spacing After):** **3pt – 6pt**.
-
----
-
-## 6. Đánh Số Phân Cấp Mục
-
-```
-I. PHẦN THỨ NHẤT (Cấp 1 — Số La Mã, IN HOA, Đậm, 14pt)
-  1. Mục lớn (Cấp 2 — Số Ả Rập, In đậm, 13pt)
-    1.1. Tiểu mục (Cấp 3 — Số Ả Rập, In đậm nghiêng, 13pt)
-      1.1.1. Mục chi tiết (Cấp 4 — Chữ thường, 13pt)
-        a) Điểm (Chữ cái thường kèm dấu ngoặc đơn)
-          - Tiết (Dấu gạch đầu dòng)
-```
+Trong các luận văn chuẩn (như hướng dẫn ĐH Thái Nguyên):
+1. **Tự động ngắt trang trước mỗi Chương (`Page break before`):**
+   - Các phần lớn: *Lời mở đầu, Danh mục tài liệu tham khảo, Phụ lục* và *Mỗi Chương (Chương 1, Chương 2...)* **luôn luôn phải bắt đầu ở đầu một trang mới**.
+   - Cài đặt trong Word: Chuột phải vào Style `Heading 1` > `Modify` > `Format` > `Paragraph` > Thẻ `Line and Page Breaks` > Tích chọn **Page break before**.
+2. **Chống tiêu đề mồ côi (`Keep with next`):**
+   - Tuyệt đối không để xảy ra hiện tượng dòng Tiêu đề nằm cô đơn ở đáy trang còn nội dung lại nằm ở trang sau.
+   - Luôn bật thuộc tính **Keep with next** cho toàn bộ `Heading 1`, `Heading 2`, `Heading 3`.
 
 ---
 
-## 7. Khối Chữ Ký Đối Xứng 2 Bên (Chuẩn Công Vụ)
+## 🔢 PHẦN 4: HỆ THỐNG ĐÁNH SỐ TRANG 2 PHÂN VÙNG (DUAL NUMBERING)
 
-Dùng bảng 2 cột **ẩn toàn bộ viền** (không dùng phím Space hoặc Tab thủ công vì sẽ bị xô lệch khi mở trên các máy tính khác):
+Khóa luận / Đề tài chuẩn bắt buộc phải chia làm **2 Section** (phân vùng):
 
-```
-┌─────────────────────────────────┬─────────────────────────────────┐
-│     ĐƠN VỊ PHÊ DUYỆT / CHỦ TỌA  │     NGƯỜI LẬP / THỦ TRƯỞNG      │
-│         (Chữ IN HOA, Đậm)       │        (Chữ IN HOA, Đậm)        │
-│                                 │                                 │
-│        (Ký và ghi rõ họ tên)    │       (Ký và ghi rõ họ tên)     │
-│             (Nghiêng)           │            (Nghiêng)            │
-│                                 │                                 │
-│                                 │                                 │
-│                                 │                                 │
-│          HỌ VÀ TÊN              │          HỌ VÀ TÊN              │
-│         (In đậm đứng)           │         (In đậm đứng)           │
-└─────────────────────────────────┴─────────────────────────────────┘
-```
+| Phân vùng (Section) | Bao gồm các phần | Kiểu đánh số trang | Vị trí đặt số trang |
+|---|---|:---:|:---:|
+| **Section 1: Phần đầu** | Trang bìa, Lời cam đoan, Lời cảm ơn, Mục lục, Danh mục ký hiệu viết tắt, Danh mục bảng biểu, hình ảnh | Chữ số La Mã thường: **`i, ii, iii, iv...`** *(Trang bìa ẩn không hiện số)* | Đáy trang (canh giữa) |
+| **Section 2: Nội dung chính** | Từ *Mở đầu / Chương 1* cho đến hết *Kết luận, Tài liệu tham khảo, Phụ lục* | Chữ số Ả Rập: **`1, 2, 3, 4...`** *(bắt đầu lại từ số 1)* | Canh giữa lề trên (NĐ 30) hoặc Đáy trang |
+
+> **Cách ngắt Section trong Word:**
+> Đặt con trỏ ở cuối trang trước Chương 1 > Vào thẻ `Layout` > `Breaks` > Chọn **Next Page**. Tại Section 2, bấm đúp vào Header/Footer > Bỏ chọn ô **Link to Previous** > Vào `Page Number` > `Format Page Numbers` > Chọn `Start at: 1`.
+
+---
+
+## 📊 PHẦN 5: QUY TẮC BẢNG BIỂU & HÌNH VẼ NGHIÊM NGẶT
+
+1. **Bảng biểu:**
+   - **NỀN TRẮNG 100%:** Tuyệt đối KHÔNG tô màu xám/xanh vào hàng hoặc ô bảng.
+   - **KHÔNG IN ĐẬM DỮ LIỆU:** Chỉ in đậm hàng tiêu đề cột hoặc hàng Tổng cộng. Toàn bộ số liệu và chữ bên trong là chữ thường đứng.
+   - **Cỡ chữ trong bảng:** `11 pt – 12 pt`.
+   - **Tên Bảng:** Đặt **TRÊN** bảng, căn trái, in nghiêng (VD: *Bảng 2.1. Thống kê kết quả khảo sát*).
+   - **Lặp lại tiêu đề:** Phải bật tính năng *Repeat Header Rows* (`tblHeader`) để khi bảng kéo dài sang trang 2, dòng tiêu đề cột tự động lặp lại.
+2. **Hình ảnh / Biểu đồ:**
+   - Hình ảnh căn giữa trang.
+   - **Tên Hình:** Đặt **DƯỚI** hình, căn giữa, in nghiêng (VD: *Hình 1.2. Sơ đồ kiến trúc hệ thống*).
+
+---
+
+## 🔤 PHẦN 6: 100% ĐỒNG BỘ PHÔNG CHỮ TIMES NEW ROMAN
+
+- Toàn bộ tài liệu từ A đến Z (kể cả Header, Footer, Số trang, Chú thích bảng biểu) **100% bắt buộc phải là Times New Roman**.
+- Bộ mã: **Unicode** tiếng Việt chuẩn.

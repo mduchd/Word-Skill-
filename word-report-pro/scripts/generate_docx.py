@@ -1,18 +1,20 @@
 """
-generate_docx.py (Bản Chuẩn Thể Thức Nhà Nước & Học Thuật Việt Nam)
+generate_docx.py (Bản Chuẩn Thể Thức Nhà Nước & Luận Văn Tốt Nghiệp)
 ───────────────────────────────────────────────────────────────────
-Quy chuẩn nghiêm ngặt:
-- 100% TOÀN BỘ VĂN BẢN LÀ PHÔNG CHỮ "TIMES NEW ROMAN" (thiết lập sâu XML w:rFonts
-  để chống lỗi tự nhảy font sang Calibri/Aptos trên Word Windows/Mac).
+Cập nhật theo chuẩn Nghị định 30/2020/NĐ-CP & Quy chuẩn Luận văn (ĐH Thái Nguyên / ĐHQG):
+- CĂN LỀ: Trái 3.0 cm, Phải 1.5 cm, Trên 2.0 cm, Dưới 2.0 cm (Khổ A4 đứng).
+- ĐOẠN VĂN: Căn đều 2 bên (Justified), Giãn dòng 1.5 lines, Spacing Before/After 6pt,
+  Thụt đầu dòng chuẩn 1.0 cm (hoặc 1.27 cm).
+- NGẮT TRANG ĐẦU CHƯƠNG: Tự động ngắt trang trước mỗi Tiêu đề cấp 1 (# CHƯƠNG, # KẾT LUẬN)
+  bằng thuộc tính page_break_before.
+- CHỐNG TIÊU ĐỀ MỒ CÔI: Bật keep_with_next cho toàn bộ Heading 1, 2, 3.
 - BẢNG BIỂU:
-  + NỀN TRẮNG 100% (KHÔNG tô màu xám, xanh hay bất kỳ màu nền nào).
-  + KHÔNG in đậm nội dung trong bảng (chỉ in đậm hàng tiêu đề hoặc dòng Tổng cộng).
-  + Cỡ chữ bảng gọn gàng: 11 - 12pt.
+  + NỀN TRẮNG 100% (KHÔNG tô màu xám/xanh).
+  + KHÔNG in đậm dữ liệu (chỉ in đậm tiêu đề hoặc dòng Tổng cộng).
+  + Cỡ chữ bảng: 11 - 12pt.
   + Chống gãy dòng khi sang trang (cantSplit), tự lặp tiêu đề (tblHeader).
-  + Căn phải cột số, căn trái cột chữ, căn giữa cột số thứ tự.
-- ĐOẠN VĂN: Căn đều 2 bên (Justified), thụt đầu dòng chuẩn 1.27 cm.
-- ĐÁNH SỐ TRANG: Tự động từ trang 2, đặt ở canh giữa lề trên (chuẩn Nghị định 30/2020).
-- CHỮ KÝ: Dùng bảng ẩn viền chống lệch vị trí khi mở trên máy khác.
+- 100% TOÀN BỘ VĂN BẢN LÀ PHÔNG CHỮ "TIMES NEW ROMAN" (thiết lập sâu XML w:rFonts).
+- ĐÁNH SỐ TRANG: Tự động từ trang 2, đặt ở canh giữa lề trên.
 
 Yêu cầu:
     pip install python-docx
@@ -44,7 +46,7 @@ except ImportError:
     sys.exit(1)
 
 
-# ── Quy chuẩn thể thức Việt Nam (Nghị định 30/2020/NĐ-CP) ───────────────────
+# ── Quy chuẩn thể thức (NĐ 30/2020 & Quy chuẩn ĐH Thái Nguyên) ───────────────
 FONT_NAME    = "Times New Roman"
 FONT_BODY    = 13
 FONT_H1      = 14
@@ -53,8 +55,8 @@ FONT_H3      = 13
 FONT_TABLE   = 11
 MARGIN_TOP   = Cm(2.0)
 MARGIN_BOT   = Cm(2.0)
-MARGIN_LEFT  = Cm(3.0)
-MARGIN_RIGHT = Cm(2.0)
+MARGIN_LEFT  = Cm(3.0)   # Đóng gáy luận văn
+MARGIN_RIGHT = Cm(1.5)   # Chuẩn ĐH Thái Nguyên (1.5cm giúp trang thoáng rộng)
 
 
 def force_times_new_roman(run, size=None, bold=None, italic=None, color=None):
@@ -96,25 +98,33 @@ def setup_document() -> Document:
     style.font.color.rgb = RGBColor(0x11, 0x11, 0x11)
 
     pf = style.paragraph_format
-    pf.line_spacing      = Pt(FONT_BODY * 1.35)
-    pf.space_before      = Pt(3)
-    pf.space_after       = Pt(3)
+    pf.line_spacing      = Pt(FONT_BODY * 1.5)  # Chuẩn 1.5 lines
+    pf.space_before      = Pt(6)                # Chuẩn Spacing Before 6pt
+    pf.space_after       = Pt(6)                # Chuẩn Spacing After 6pt
     pf.alignment         = WD_ALIGN_PARAGRAPH.JUSTIFY
-    pf.first_line_indent = Cm(1.27)
+    pf.first_line_indent = Cm(1.0)              # Chuẩn First line 1.0 cm
     return doc
 
 
-def add_heading(doc: Document, text: str, level: int):
-    """Thêm tiêu đề chuẩn Times New Roman theo cấp bậc."""
+def add_heading(doc: Document, text: str, level: int, is_first_heading: bool = False):
+    """
+    Thêm tiêu đề chuẩn Times New Roman theo cấp bậc:
+    - Bật keep_with_next để chống tiêu đề mồ côi ở cuối trang.
+    - Cấp 1 (# CHƯƠNG): Bật page_break_before để tự động mở đầu trang mới.
+    """
     p = doc.add_paragraph()
     p.paragraph_format.first_line_indent = Cm(0)
     p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.LEFT
+    p.paragraph_format.keep_with_next = True    # Chống mồ côi dòng tiêu đề
     
     run = p.add_run(text.upper() if level == 1 else text)
     if level == 1:
         force_times_new_roman(run, size=FONT_H1, bold=True)
         p.paragraph_format.space_before = Pt(14)
         p.paragraph_format.space_after  = Pt(6)
+        # Tự động ngắt sang trang mới trước mỗi chương (ngoại trừ tiêu đề bìa đầu tiên)
+        if not is_first_heading and len(doc.paragraphs) > 2:
+            p.paragraph_format.page_break_before = True
     elif level == 2:
         force_times_new_roman(run, size=FONT_H2, bold=True)
         p.paragraph_format.space_before = Pt(10)
@@ -289,6 +299,8 @@ def parse_markdown_to_docx(md_text: str, doc: Document):
     """Phân tích nội dung Markdown và xuất ra Word chuẩn 100% Times New Roman."""
     lines = md_text.splitlines()
     i = 0
+    first_h1_passed = False
+
     while i < len(lines):
         line = lines[i].strip()
         if not line:
@@ -297,7 +309,8 @@ def parse_markdown_to_docx(md_text: str, doc: Document):
 
         # Mục lục tự động
         if "MỤC LỤC" in line.upper() and ("(TỰ ĐỘNG" in line.upper() or "TABLE OF CONTENTS" in line.upper()):
-            add_heading(doc, "MỤC LỤC", 1)
+            add_heading(doc, "MỤC LỤC", 1, is_first_heading=(not first_h1_passed))
+            first_h1_passed = True
             add_toc_field(doc)
             i += 1
             continue
@@ -308,7 +321,8 @@ def parse_markdown_to_docx(md_text: str, doc: Document):
         elif line.startswith("## "):
             add_heading(doc, line[3:], 2)
         elif line.startswith("# "):
-            add_heading(doc, line[2:], 1)
+            add_heading(doc, line[2:], 1, is_first_heading=(not first_h1_passed))
+            first_h1_passed = True
         # Đường kẻ ngang
         elif line.startswith("---") or line.startswith("***"):
             p = doc.add_paragraph()
@@ -375,7 +389,7 @@ def parse_markdown_to_docx(md_text: str, doc: Document):
                 r = p.add_run(line.replace("**", ""))
                 force_times_new_roman(r, size=FONT_BODY, bold=True)
             else:
-                p.paragraph_format.first_line_indent = Cm(1.27)
+                p.paragraph_format.first_line_indent = Cm(1.0)  # Chuẩn First line 1.0 cm
                 p.paragraph_format.alignment = WD_ALIGN_PARAGRAPH.JUSTIFY
                 r = p.add_run(line)
                 force_times_new_roman(r, size=FONT_BODY, bold=False)
@@ -400,7 +414,7 @@ def main():
     parse_markdown_to_docx(md_text, doc)
     add_page_number_to_header(doc.sections[0])
     doc.save(output_path)
-    print(f"✅ Đã tạo file Word chuẩn 100% Times New Roman: {output_path}")
+    print(f"✅ Đã tạo file Word chuẩn 100% Times New Roman & ĐH Thái Nguyên: {output_path}")
 
 
 if __name__ == "__main__":
