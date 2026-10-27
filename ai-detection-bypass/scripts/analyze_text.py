@@ -1,10 +1,11 @@
 """
-analyze_text.py
-───────────────
+analyze_text.py (Bản Nâng Cấp: Quét Chỉ Số & Ký Tự Cấm AI)
+──────────────────────────────────────────────────────────
 Phân tích văn bản (tiếng Việt & tiếng Anh) để đo lường các chỉ số AI Detection:
 - Độ biến thiên độ dài câu (Burstiness score / Standard Deviation)
 - Tỷ lệ câu Ngắn - Trung bình - Dài (so với chuẩn 30-50-20)
 - Mật độ từ cấm AI (Transition words, AI vocabulary)
+- QUÉT CÁC KÝ TỰ CẤM CỦA AI: Emoji, Dấu gạch ngang Em Dash (—), In đậm lắt nhắt (**...**), Ký tự mũi tên (→, =>)
 - Đánh giá chỉ số rủi ro phát hiện AI (AI Risk Index: 0% - 100%)
 
 Cách dùng:
@@ -44,7 +45,6 @@ AI_PATTERNS_EN = [
 
 def split_sentences(text: str) -> list[str]:
     """Tách câu dựa trên dấu câu kết thúc (. ! ? và ngắt dòng)."""
-    # Thay thế các dấu viết tắt phổ biến để tránh ngắt nhầm (vd: TP.HCM, PGS.TS)
     cleaned = re.sub(r"(TP|PGS|TS|ThS|GS|BS|KS|Th\.|Dr|Prof)\.", r"\1<DOT>", text)
     sentences = re.split(r"[.!?\n]+", cleaned)
     result = []
@@ -93,35 +93,81 @@ def find_ai_keywords(text: str) -> dict:
     return matches
 
 
-def calculate_risk(burst: dict, keywords: dict, total_words: int) -> tuple[int, list[str]]:
+def find_ai_symbols(text: str) -> dict:
+    """Quét các ký tự đặc trưng mà AI hay lạm dụng."""
+    symbols_found = {}
+
+    # 1. Quét Emoji
+    emojis = re.findall(r"[\U00010000-\U0010ffff]|[\u2600-\u27ff]", text)
+    if emojis:
+        symbols_found["Emoji"] = len(emojis)
+
+    # 2. Dấu gạch ngang dài Em Dash (—) hoặc En Dash (–)
+    em_dashes = text.count("—") + text.count("–")
+    if em_dashes > 2:
+        symbols_found["Dấu gạch ngang Em Dash (—/–)"] = em_dashes
+
+    # 3. Ký tự mũi tên suy luận
+    arrows = len(re.findall(r"→|=>|->|⇒", text))
+    if arrows > 0:
+        symbols_found["Ký tự mũi tên (→, =>)"] = arrows
+
+    # 4. In đậm lắt nhắt giữa câu (**...**)
+    inline_bolds = len(re.findall(r"[^\n#]+\*\*[^*]+\*\*", text))
+    if inline_bolds > 3:
+        symbols_found["In đậm lắt nhắt giữa câu (**...**)"] = inline_bolds
+
+    # 5. Dấu & viết tắt
+    ampersands = len(re.findall(r"\b\w+\s*&\s*\w+\b", text))
+    if ampersands > 0:
+        symbols_found["Dấu '&' viết tắt"] = ampersands
+
+    return symbols_found
+
+
+def calculate_risk(burst: dict, keywords: dict, symbols: dict, total_words: int) -> tuple[int, list[str]]:
     """Tính điểm rủi ro AI (0% - 100%) và đưa ra cảnh báo."""
     risk = 0
     feedback = []
 
-    # 1. Đánh giá Burstiness (độ lệch chuẩn độ dài câu)
+    # 1. Đánh giá Burstiness
     if burst["std_dev"] < 4.5:
-        risk += 35
+        risk += 30
         feedback.append("[!] Câu có độ dài quá đều nhau (StdDev < 4.5). Cần đan xen câu rất ngắn (<8 từ) và câu ghép dài.")
     elif burst["std_dev"] < 6.5:
-        risk += 20
+        risk += 15
         feedback.append("[*] Độ biến thiên độ dài câu ở mức trung bình. Nên thêm 1-2 câu ngắn tạo nhịp ngắt.")
     else:
         feedback.append("[OK] Độ biến thiên câu (Burstiness) tốt, tự nhiên như người viết.")
 
-    # 2. Đánh giá tỷ lệ câu ngắn (Target ~25-30%)
+    # 2. Đánh giá tỷ lệ câu ngắn
     if burst["short_pct"] < 15:
-        risk += 20
+        risk += 15
         feedback.append("[!] Quá ít câu ngắn (<15%). Văn bản thiếu nhịp thở tự nhiên, dễ bị cờ là do AI viết.")
 
     # 3. Mật độ từ khóa AI
     total_ai_words = sum(keywords.values())
     density = (total_ai_words / max(total_words, 1)) * 100
     if density > 1.5:
-        risk += 35
+        risk += 30
         feedback.append(f"[!] Mật độ từ cấm AI cao ({round(density, 2)}% từ ngữ lặp đi lặp lại: {list(keywords.keys())[:5]}).")
     elif density > 0.8:
-        risk += 20
+        risk += 15
         feedback.append(f"[*] Xuất hiện nhiều từ nối/từ vựng AI đặc trưng ({round(density, 2)}%).")
+
+    # 4. Đánh giá Ký tự cấm AI
+    if "Emoji" in symbols:
+        risk += 30
+        feedback.append(f"[NGHIÊM TRỌNG] Phát hiện {symbols['Emoji']} emoji trong văn bản. Báo cáo học thuật/công vụ tuyệt đối KHÔNG dùng emoji!")
+    if "Dấu gạch ngang Em Dash (—/–)" in symbols:
+        risk += 15
+        feedback.append(f"[!] Lạm dụng {symbols['Dấu gạch ngang Em Dash (—/–)']} dấu gạch ngang Em Dash (—). Tiếng Việt người thật hay dùng dấu phẩy hoặc ngoặc đơn.")
+    if "In đậm lắt nhắt giữa câu (**...**)" in symbols:
+        risk += 15
+        feedback.append(f"[!] Phát hiện {symbols['In đậm lắt nhắt giữa câu (**...**)']} cụm in đậm lắt nhắt giữa câu. Người thật chỉ in đậm tiêu đề hoặc số liệu tổng.")
+    if "Ký tự mũi tên (→, =>)" in symbols:
+        risk += 10
+        feedback.append(f"[*] Phát hiện {symbols['Ký tự mũi tên (→, =>)']} ký tự mũi tên. Hãy thay bằng chữ 'dẫn đến' hoặc 'từ đó'.")
 
     # Giới hạn risk từ 0 đến 100
     risk = min(max(risk, 5), 95)
@@ -148,10 +194,11 @@ def main():
 
     burst = analyze_burstiness(sentences)
     keywords = find_ai_keywords(text)
-    risk, feedback = calculate_risk(burst, keywords, len(words))
+    symbols = find_ai_symbols(text)
+    risk, feedback = calculate_risk(burst, keywords, symbols, len(words))
 
     print("\n" + "=" * 60)
-    print(" KẾT QUẢ PHÂN TÍCH CHỈ SỐ AI DETECTION")
+    print(" KẾT QUẢ PHÂN TÍCH CHỈ SỐ AI DETECTION & KÝ TỰ CẤM")
     print("=" * 60)
     print(f"  Tổng số từ: {len(words)} từ | Tổng số câu: {len(sentences)} câu")
     print(f"  Độ dài câu trung bình: {burst['avg']} từ/câu")
@@ -167,14 +214,21 @@ def main():
     else:
         print("   [OK] Không phát hiện từ khóa AI đặc trưng.")
 
+    print("\n KÝ TỰ & DẤU CÂU CẤM ĐƯỢC PHÁT HIỆN:")
+    if symbols:
+        for s, count in symbols.items():
+            print(f"   - {s}: {count} lần")
+    else:
+        print("   [OK] Không phát hiện emoji, mũi tên hay ký tự AI cấm.")
+
     print("\n" + "-" * 60)
     print(f" CHỈ SỐ RỦI RO BỊ AI DETECTOR PHÁT HIỆN: {risk}%")
     if risk >= 60:
-        print("   [NGUY CƠ CAO] - Cần viết lại theo chiến lược Full Paraphrase.")
+        print("   [NGUY CƠ CAO] - Cần dọn dẹp ký tự cấm và viết lại theo chiến lược Full Paraphrase.")
     elif risk >= 35:
-        print("   [NGUY CƠ TRUNG BÌNH] - Nên chỉnh sửa các câu nối và đan xen câu ngắn.")
+        print("   [NGUY CƠ TRUNG BÌNH] - Nên xóa các ký tự thừa, chỉnh sửa các câu nối và đan xen câu ngắn.")
     else:
-        print("   [AN TOÀN] - Văn phong tự nhiên, perplexity & burstiness đạt chuẩn.")
+        print("   [AN TOÀN] - Văn phong tự nhiên, perplexity, burstiness & ký tự đạt chuẩn.")
 
     print("\n KHUYẾN NGHỊ CHỈNH SỬA:")
     for fb in feedback:

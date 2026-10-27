@@ -1,8 +1,26 @@
-# Danh Sách Pattern AI & Từ Cần Tránh
+# Danh Sách Pattern AI, Từ Ngữ & Ký Tự Cần Tránh Tuyệt Đối
 
-## 1. Từ Tiếng Anh Bị Phát Hiện Nhiều Nhất
+---
 
-Nếu viết tiếng Anh hoặc text pha tiếng Anh, TUYỆT ĐỐI tránh:
+## 🚫 1. CÁC KÝ TỰ & DẤU CÂU CẤM SỬ DỤNG (AI SIGNATURE SYMBOLS)
+
+Đây là những "dấu vân tay" tố cáo văn bản do AI sinh ra hoặc copy từ chatbot:
+
+| Ký tự cấm | Lý do cấm | Cách người thật viết |
+|---|---|---|
+| **Emoji / Biểu tượng:**<br>`🚀, 💡, ✨, 🔥, 📌, 🎯, 👉, ✅, ❌, 🌟, 📈, 🤖` | Văn bản hành chính, báo cáo, luận văn **tuyệt đối 100% không dùng emoji**. Sự xuất hiện của emoji là bằng chứng 100% của chatbot. | Xóa bỏ hoàn toàn. Dùng số thứ tự hoặc đề mục phân cấp chuẩn. |
+| **Dấu gạch ngang dài (Em Dash `—` hoặc En Dash `–`) dùng giữa câu:**<br>*"Vấn đề này — dù đã cảnh báo — vẫn diễn ra"* | Tiếng Việt chuẩn của người viết học thuật rất hiếm khi gõ phím Alt+0151 (`—`) để chêm vế phụ. AI (Claude/ChatGPT) bị "nghiện" dấu này. | Dùng dấu phẩy `,` hoặc đặt trong dấu ngoặc đơn `(...)` bình thường. |
+| **In đậm lắt nhắt giữa câu (Inline Bolding):**<br>*"Chuyển đổi số là **quá trình tất yếu** giúp tăng **năng lực cạnh tranh**"* | AI có thói quen tự bôi đậm 2–3 từ khóa trong câu như bài post mạng xã hội. Người thật viết báo cáo **không bao giờ bôi đậm tùy tiện trong đoạn văn**. | Chỉ in đậm Tiêu đề mục hoặc số liệu Bảng tổng kết. Văn xuôi để chữ thường 100%. |
+| **Ký tự mũi tên & suy luận:**<br>`→`, `=>`, `->`, `⇒` | AI lười biếng thường dùng mũi tên thay vì viết câu hoàn chỉnh. | Viết rõ thành câu: *"dẫn đến"*, *"kéo theo"*, *"từ đó tạo ra"*. |
+| **Dấu và viết tắt:** `&` | Không dùng dấu `&` trong câu tiếng Việt chuẩn. | Luôn viết đầy đủ chữ **"và"**. |
+| **Ký tự Markdown bị sót:**<br>Dấu hoa thị `**`, dấu thăng `#`, backtick `` ` `` | Lỗi copy/paste từ màn hình chat sang Word. | Rà soát sạch sẽ mọi ký tự Markdown trước khi nộp. |
+| **Dấu gạch chéo lạm dụng:**<br>*"phương pháp/giải pháp"*, *"nghiên cứu/triển khai"* | AI dùng dấu `/` để tránh phải chọn từ chính xác. | Chọn đúng một từ chuẩn xác nhất, hoặc viết *"và"*, *"hoặc"*. |
+
+---
+
+## 2. Từ Tiếng Anh Bị Phát Hiện Nhiều Nhất
+
+Nếu viết tiếng Anh hoặc báo cáo có tóm tắt Abstract, TUYỆT ĐỐI tránh:
 
 | ❌ Tránh | ✅ Thay bằng |
 |---|---|
@@ -15,72 +33,45 @@ Nếu viết tiếng Anh hoặc text pha tiếng Anh, TUYỆT ĐỐI tránh:
 | additionally | also, plus, on top of that |
 | it's worth noting | note that, importantly |
 | in conclusion | so, to wrap up, all in all |
-| it is important to | — (just say it directly) |
-| in today's world | — (too cliché, cut it) |
+| it is important to | — (nói trực tiếp nội dung) |
+| in today's world / landscape | — (sáo rỗng, cắt bỏ) |
 | navigating | dealing with, handling |
 | streamline | simplify, speed up |
 | game-changer | significant shift, major change |
 | pivotal | key, critical, important |
 | foster | build, grow, develop |
+| testament to | evidence of, proof that |
+| intricate | complex, detailed |
 
 ---
 
-## 2. Từ Tiếng Việt AI Hay Dùng Quá Mức
+## 3. Từ Tiếng Việt AI Hay Dùng Quá Mức
 
-| ❌ Tránh dùng nhiều | ✅ Thay thế |
+| ❌ Tránh lặp đi lặp lại | ✅ Thay thế tự nhiên |
 |---|---|
-| "quan trọng" (liên tục) | "cần thiết", "thiết yếu", "có giá trị" |
+| "đóng vai trò quan trọng" | "góp phần then chốt", "ảnh hưởng lớn đến" |
 | "bên cạnh đó" | "ngoài ra", "cũng cần nói thêm" |
-| "nhìn chung" | "tổng thể mà nói", "xét toàn cảnh" |
-| "thực tế cho thấy" | "trong thực tế", "trên thực tế" |
-| "không thể phủ nhận" | "rõ ràng", "dễ thấy rằng" |
-| "đóng vai trò quan trọng" | "góp phần lớn vào", "là yếu tố then chốt" |
-| "trong bối cảnh hiện nay" | "hiện nay", "ngày nay", "lúc này" |
-| "cần phải" (lặp nhiều lần) | "nên", "cần", "phải" (luân phiên) |
-| "giải pháp toàn diện" | mô tả cụ thể thay vì dùng cụm này |
-| "hướng đến sự phát triển bền vững" | nói cụ thể bền vững theo chiều nào |
+| "hơn nữa" | "thêm vào đó", "chưa kể là" |
+| "nhìn chung" | "tổng thể mà nói", "xét toàn diện" |
+| "thực tế cho thấy rằng" | "trên thực tế", "số liệu phản ánh" |
+| "không thể phủ nhận" | "rõ ràng là", "dễ thấy" |
+| "trong bối cảnh hiện nay" | "hiện nay", "thời điểm này" |
+| "cần phải" (lặp nhiều lần) | "nên", "buộc phải", "cần" |
+| "giải pháp toàn diện" | chỉ rõ giải pháp gì thay vì dùng từ mơ hồ |
+| "hướng đến sự phát triển bền vững" | mô tả rõ mục tiêu cụ thể |
 
 ---
 
-## 3. Cấu Trúc Câu AI Bị Phát Hiện
+## 4. Cấu Trúc Bị Bắt Bài
 
-### 3.1 Cấu trúc liệt kê hoàn hảo
-❌ "Có ba lý do chính: Thứ nhất,... Thứ hai,... Thứ ba,..."
-✅ Xen vào ý kiến, thêm "thực ra điều thứ hai mới là điểm đáng chú ý nhất..."
+### 4.1. "Căn bệnh" Gạch đầu dòng mọi lúc mọi nơi (Bullet-point-itis)
+- **Dấu hiệu:** Hỏi bất kỳ điều gì AI cũng tự động chia thành danh sách 5–7 dấu gạch đầu dòng `-` hoặc `•`.
+- **Khắc phục:** Viết thành các đoạn văn xuôi liên kết mạch lạc (flowing prose). Chỉ dùng bảng biểu hoặc danh mục khi liệt kê số liệu kỹ thuật.
 
-### 3.2 Câu mở đầu bằng "This/Điều này"
-❌ "Điều này cho thấy rằng..."
-❌ "Điều này chứng minh..."
-✅ "Kết quả đó phản ánh...", "Con số ấy nói lên rằng..."
+### 4.2. Cấu trúc liệt kê song song hoàn hảo
+- ❌ *"Có ba nguyên nhân: Thứ nhất,... Thứ hai,... Thứ ba,... Cuối cùng,..."*
+- ✅ Bẻ gãy nhịp điệu: Đưa nguyên nhân quan trọng nhất lên đầu kèm phân tích sâu, các nguyên nhân còn lại gom thành một vế tổng hợp.
 
-### 3.3 Câu kết đoạn quá tròn trịa
-❌ "Tóm lại, có thể thấy rằng vấn đề này đòi hỏi sự quan tâm từ nhiều phía."
-✅ Kết đoạn bằng câu hỏi mở, hoặc dẫn sang ý tiếp theo không cần "tóm lại"
-
-### 3.4 Kết bài sáo rỗng
-❌ "Tóm lại, chủ đề này rất phức tạp và cần có thêm nghiên cứu."
-❌ "In conclusion, this topic requires further exploration."
-✅ Kết bằng một nhận định cụ thể, hoặc câu hỏi còn bỏ ngỏ
-
----
-
-## 4. Cấu Trúc Đoạn AI Điển Hình (Cần Phá Vỡ)
-
-```
-[Câu chủ đề] → [Câu giải thích 1] → [Câu ví dụ] → [Câu kết đoạn]
-```
-
-Thực tế người viết hay:
-- Bắt đầu bằng câu hỏi hoặc nhận xét
-- Nhảy vào ví dụ ngay mà không giải thích trước
-- Để câu kết đoạn mở, không "tròn trịa"
-
----
-
-## 5. Dấu Hiệu AI Trong Văn Phong Học Thuật VN
-
-- Dùng "nghiên cứu chỉ ra rằng" mà không trích nguồn cụ thể
-- Mọi đoạn đều bắt đầu bằng câu topic sentence rõ ràng
-- Không bao giờ dùng dấu ngoặc đơn cho chú thích thân mật
-- Không có câu nào thể hiện sự ngạc nhiên, hoặc thừa nhận điều không chắc chắn
-- Tất cả số liệu đều được làm tròn đẹp (AI không biết số liệu lẻ)
+### 4.3. Mở đầu bằng "This/Điều này" và Kết bài "Tóm lại"
+- ❌ *"Điều này cho thấy rằng..."* $\rightarrow$ Thay bằng: *"Kết quả đó phản ánh..."*
+- ❌ *"Tóm lại, có thể thấy rằng..."* $\rightarrow$ Thay bằng nhận định thực tiễn hoặc hướng đi tiếp theo.
