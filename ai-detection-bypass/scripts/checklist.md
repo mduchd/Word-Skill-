@@ -1,7 +1,15 @@
 # Checklist Tự Kiểm Tra Trước Khi Nộp / Xuất Bản
 
 Chạy checklist này sau khi hoàn thành soạn thảo hoặc rewrite. Mỗi ô ✅ = 1 điểm an toàn.
-Mục tiêu: ít nhất **22/27 điểm** trước khi output.
+Mục tiêu: ít nhất **25/30 điểm** trước khi output.
+
+---
+
+## 🔒 TIÊU CHUẨN TIÊN QUYẾT: BẢO TOÀN ĐẦU VÀO (BẮT BUỘC ĐẠT 100%)
+
+- [ ] **TIÊU ĐỀ & ĐỀ MỤC NGUYÊN VẸN:** Tiêu đề báo cáo, tên đề tài, tên dự án và các tiêu đề mục của người dùng được giữ nguyên 100% từng chữ (tuyệt đối không tự ý đổi hoặc "sáng tạo" lại).
+- [ ] **SỬA ĐÚNG PHẠM VI YÊU CẦU:** Chỉ sửa đúng phần/đoạn người dùng yêu cầu, không tự ý xáo trộn hoặc viết lại lan man sang các đoạn khác.
+- [ ] **BẢO LƯU SỰ THẬT & THUẬT NGỮ:** Tên riêng, cơ quan, ngày tháng, thông số kỹ thuật, số liệu đo đạc và thuật ngữ chuyên ngành được giữ nguyên vẹn 100%.
 
 ---
 
@@ -56,13 +64,7 @@ Mục tiêu: ít nhất **22/27 điểm** trước khi output.
 
 | Điểm | Đánh giá |
 |---|---|
-| 25–27 | 🏆 Xuất sắc — Điềm đạm, có chiều sâu thực tế, triệt tiêu mọi dấu vết AI |
-| 21–24 | ✅ Tốt — Bố cục chuẩn, giọng văn khách quan, an toàn với detectors |
-| 16–20 | ⚠️ Trung bình — Còn vướng giọng điệu PR hoặc từ nối máy móc |
-| < 16 | ❌ Nguy cơ cao — Giọng văn quá rập khuôn, cần hạ nhiệt và rewrite |
-
----
-
-*Lưu ý: Checklist này là công cụ định hướng, không phải bảo đảm tuyệt đối.
-Việc giữ cấu trúc MECE chặt chẽ, sạch bóng ký tự AI, giọng văn điềm tĩnh và có chiều sâu thực tiễn mới là
-giải pháp bền vững nhất.*
+| 27–30 | 🏆 Xuất sắc — Bảo toàn 100% đầu vào, phẫu thuật chính xác, triệt tiêu dấu vết AI |
+| 23–26 | ✅ Tốt — Bố cục chuẩn, đúng trọng tâm, an toàn với detectors |
+| 18–22 | ⚠️ Trung bình — Còn vướng từ nối máy móc hoặc sửa hơi rộng so với yêu cầu |
+| < 18 | ❌ Nguy cơ cao — Sửa lan man hoặc dính lỗi ký tự cấm, cần chỉnh sửa lại |

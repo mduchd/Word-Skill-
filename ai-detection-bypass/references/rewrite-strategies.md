@@ -1,105 +1,94 @@
-# Chiến Lược Rewrite Theo Mức Độ Rủi Ro
+# Chiến Lược Rewrite Đúng Trọng Tâm & Bảo Toàn Đầu Vào (Surgical Rewriting)
+
+> [!CAUTION]
+> **QUY TẮC BẢO TOÀN ĐẦU VÀO (IMMUTABLES RULE):**
+> Trong MỌI chiến lược rewrite từ thấp đến cao:
+> 1. **TIÊU ĐỀ & ĐỀ MỤC LÀ BẤT BIẾN:** Giữ nguyên 100% từng chữ của tiêu đề báo cáo và các đề mục của người dùng. Tuyệt đối không tự ý đổi tiêu đề.
+> 2. **SỰ THẬT & SỐ LIỆU LÀ BẤT BIẾN:** Không thay đổi số liệu, ngày tháng, tên riêng, thuật ngữ kỹ thuật.
+> 3. **ĐÚNG PHẠM VI:** Chỉ can thiệp vào câu hoặc đoạn văn cần sửa, không xáo trộn cấu trúc hoặc viết lại lan man sang phần khác.
+
+---
 
 ## Chiến Lược 1: POLISH (Rủi ro thấp < 30%)
 
-Chỉ chỉnh nhỏ, không viết lại hoàn toàn.
+Chỉ chỉnh sửa cục bộ tại các điểm có vấn đề, không động chạm vào phần văn bản đã ổn định.
 
 ### Việc cần làm:
-- [ ] Tìm 3–5 câu có transition word điển hình → thay bằng cách diễn đạt khác
-- [ ] Chọn đoạn dài nhất → chèn 1 câu ngắn (<8 từ) vào giữa
-- [ ] Thay 2–3 từ "AI vocabulary" bằng từ cụ thể hơn
-- [ ] Thêm 1 chi tiết cụ thể (số, tên, thời gian) vào đoạn mà hiện tại chung chung nhất
+- [ ] Giữ nguyên 100% tiêu đề, đề mục và mạch bài gốc.
+- [ ] Tìm các từ nối AI điển hình (*"Bên cạnh đó"*, *"Hơn nữa"*) $\rightarrow$ thay bằng cách diễn đạt tự nhiên hoặc bỏ hẳn từ nối.
+- [ ] Chèn 1 câu ngắn (<8 từ) vào giữa đoạn dài nhất để tạo nhịp thở.
+- [ ] Xóa bỏ toàn bộ emoji, dấu mũi tên, hoặc in đậm lắt nhắt nếu có.
 
 ---
 
-## Chiến Lược 2: SECTION REWRITE (Rủi ro trung bình 30–60%)
+## Chiến Lược 2: SURGICAL REWRITE (Rủi ro trung bình 30–60%)
 
-Viết lại các đoạn có điểm cao nhất.
+Viết lại cục bộ các đoạn bị chấm điểm AI cao nhất, giữ nguyên khung sườn bài viết.
 
-### Cách xác định đoạn nguy hiểm nhất:
-- Đoạn nào có ≥ 2 transition word
-- Đoạn nào toàn câu cùng độ dài
-- Đoạn nào bắt đầu và kết thúc bằng câu "template"
+### Cách xác định câu/đoạn cần phẫu thuật:
+- Câu nào có mật độ từ nối AI dày đặc.
+- Đoạn nào toàn câu cùng một độ dài (thiếu Burstiness).
+- Đoạn nào bắt đầu bằng câu mở đầu rập khuôn (*"Bạn đã bao giờ..."*).
 
-### Quy trình rewrite từng đoạn:
-1. Đọc đoạn gốc, ghi ra **ý chính** (không nhìn vào text gốc)
-2. Viết lại đoạn đó từ đầu dựa trên ý chính vừa ghi
-3. So sánh — nếu vẫn còn câu nào giống gốc quá, paraphrase thêm
-
----
-
-## Chiến Lược 3: FULL PARAPHRASE (Rủi ro cao 60–80%)
-
-Viết lại toàn bộ, chỉ giữ thông tin/số liệu.
-
-### Bước 1 — Trích xuất Data Points
-Liệt kê tất cả thông tin quan trọng cần giữ:
-- Số liệu, tỷ lệ phần trăm
-- Tên người/tổ chức/địa điểm
-- Kết quả, kết luận chính
-
-### Bước 2 — Viết lại từ đầu
-Dùng data points đó làm nguyên liệu. Không nhìn vào bản gốc.
-Apply toàn bộ kỹ thuật từ `../anti-ai-writer/references/humanizing-techniques.md`.
-
-### Bước 3 — Kiểm tra không overlap
-Đọc lại bản mới so với bản gốc — không được có chuỗi >6 từ giống nhau.
+### Quy trình sửa:
+1. Đọc câu gốc để nắm chính xác ý đồ của người viết.
+2. Viết lại cấu trúc câu đó (chuyển câu bị động sang chủ động, ngắt câu dài thành 2 câu ngắn).
+3. Đặt lại vào đúng vị trí cũ trong đoạn văn, đảm bảo tính liên kết mạch lạc với câu trước và câu sau.
 
 ---
 
-## Chiến Lược 4: RECONSTRUCT (Rủi ro rất cao > 80%)
+## Chiến Lược 3: DEEP REPHRASING (Rủi ro cao 60–80%)
 
-Chỉ lấy facts, viết lại hoàn toàn với cấu trúc khác.
+Tái cấu trúc cách diễn đạt của toàn đoạn văn nhưng **khóa chặt toàn bộ thông tin cốt lõi**.
 
-### Cho phép thay đổi:
-- Thứ tự trình bày các ý
-- Cách mở đầu và kết thúc
-- Văn phong (chuyển từ liệt kê sang tường thuật)
-- Góc nhìn (chuyển từ "khách quan" sang có quan điểm rõ ràng)
+### Các bước thực hiện:
+1. **Khóa thông tin bất biến:** Đánh dấu toàn bộ số liệu, tên riêng, thuật ngữ chuyên ngành và luận điểm chính.
+2. **Thay đổi cấu trúc cú pháp:**
+   - Thay đổi thứ tự các vế câu (đưa vế phụ hoặc điều kiện lên trước).
+   - Đan xen nhịp điệu 30-50-20 (câu ngắn xen câu trung bình/dài).
+   - Bổ sung ít nhất một sự đánh đổi thực tế (Trade-off / chi phí / con người) để tăng tính người thật.
+3. **Giữ nguyên trật tự logic:** Không được tự tiện đảo đoạn 1 xuống đoạn 3, không xóa bỏ ý của tác giả.
 
 ---
 
-## Bảng Thay Thế Từ Nhanh
+## Chiến Lược 4: TOTAL RECONSTRUCTION (Rủi ro rất cao > 80%)
+
+Khi văn bản gốc bị dính mẫu câu chatbot quá nặng (100% giọng máy), viết lại toàn diện nhưng **tuân thủ nghiêm ngặt ranh giới**:
+
+### Ranh giới bắt buộc:
+- **Tiêu đề báo cáo:** Giữ nguyên 100%.
+- **Các đề mục (Headings):** Giữ nguyên 100%.
+- **Thông tin & Số liệu:** Giữ nguyên 100%.
+- **Trình tự luận điểm:** Bám sát dàn ý của người dùng, không được tự ý bịa thêm mục mới hay bỏ sót nội dung gốc.
+- **Thực hiện:** Viết lại toàn bộ câu văn bằng văn phong tự nhiên, điềm tĩnh, triệt tiêu mọi từ ngữ PR và cấu trúc liệt kê máy móc.
+
+---
+
+## Bảng Thay Thế Từ Nhanh Chuẩn Xác
 
 ### Tiếng Việt
 
-| ❌ Gốc | ✅ Thay thế 1 | ✅ Thay thế 2 |
+| ❌ Từ máy móc | ✅ Thay thế tự nhiên 1 | ✅ Thay thế tự nhiên 2 |
 |---|---|---|
-| "quan trọng" | "then chốt" | "có ý nghĩa lớn" |
-| "bên cạnh đó" | "ngoài ra" | "cũng cần nói thêm" |
+| "đóng vai trò quan trọng" | "ảnh hưởng lớn đến" | "là yếu tố then chốt" |
+| "bên cạnh đó" | "ngoài ra" | "cũng cần xét đến" |
 | "tuy nhiên" | "nhưng" | "thế nhưng" |
-| "cho thấy rằng" | "phản ánh" | "chứng tỏ" |
-| "cần phải" | "nên" | "buộc phải" |
-| "nhìn chung" | "xét toàn cảnh" | "tổng mà nói" |
-| "đóng vai trò" | "góp phần" | "là yếu tố" |
-| "ngày càng" | "dần dần" | "theo thời gian" |
-| "hiệu quả" | "thiết thực" | "có kết quả rõ ràng" |
-| "phát triển bền vững" | [mô tả cụ thể] | [mô tả cụ thể] |
+| "điều này cho thấy rằng" | "kết quả đó phản ánh" | "số liệu chứng tỏ" |
+| "cần phải" | "nên" | "cần" |
+| "nhìn chung" | "tổng thể mà nói" | "xét toàn diện" |
+| "hướng đến phát triển bền vững" | "hướng tới hiệu quả lâu dài" | [nêu mục tiêu cụ thể] |
+| "giải pháp toàn diện" | [chỉ rõ tên giải pháp] | [chỉ rõ hành động] |
 
 ### Tiếng Anh
 
-| ❌ Gốc | ✅ Thay thế 1 | ✅ Thay thế 2 |
+| ❌ Từ máy móc | ✅ Thay thế tự nhiên 1 | ✅ Thay thế tự nhiên 2 |
 |---|---|---|
-| "Furthermore," | "On top of that," | "And—" |
-| "It is important to" | [delete, just say it] | "Worth noting:" |
-| "In conclusion," | "So," | "All in all," |
-| "delve into" | "look at" | "explore" |
+| "Furthermore," | "Also," | "And—" |
+| "It is important to" | [xóa, nói trực tiếp] | "We should note that" |
+| "In conclusion," | "To wrap up," | "All in all," |
+| "delve into" | "look at" | "examine" |
 | "robust" | "solid" | "reliable" |
 | "utilize" | "use" | "apply" |
-| "leverage" | "use" | "draw on" |
-| "comprehensive" | "thorough" | "full" |
-| "navigate" | "handle" | "deal with" |
-| "showcase" | "show" | "highlight" |
-
----
-
-## Kỹ Thuật Tăng Perplexity (Gây Bất Ngờ Cho Detector)
-
-Các detector đo **perplexity** — mức độ bất ngờ của từ tiếp theo.
-AI chọn từ an toàn nhất → perplexity thấp → bị detect.
-
-Cách tăng perplexity:
-1. **Dùng ẩn dụ bất ngờ**: "Dữ liệu như một tấm gương vỡ — mỗi mảnh đúng, nhưng ghép lại thì lệch"
-2. **Đặt câu hỏi giữa đoạn phân tích**: Phá nhịp kỳ vọng của detector
-3. **Dùng từ địa phương / thông tục 1 lần**: "cũng được thôi", "thật ra mà nói"
-4. **Viết câu không hoàn chỉnh có chủ đích**: "Một bài toán cũ. Một câu trả lời mới."
+| "leverage" | "use" | "take advantage of" |
+| "comprehensive" | "thorough" | "detailed" |
+| "streamline" | "simplify" | "speed up" |

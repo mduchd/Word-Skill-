@@ -5,24 +5,34 @@ description: >-
   measure perplexity/burstiness stats, or rewrite/edit existing text to reduce
   AI detection scores. Activate when the user says "tránh AI", "bypass AI detector",
   "kiểm tra AI", "chỉnh văn bản tránh bị phát hiện", or wants to pass tools like
-  GPTZero, Turnitin AI, Copyleaks, or ZeroGPT. Works on both Vietnamese
-  and English text.
+  GPTZero, Turnitin AI, Copyleaks, or ZeroGPT. Enforces strict input sanctity
+  (never change user titles, headings, or scope). Works on Vietnamese and English.
 ---
 
 # AI Detection Bypass
 
 Skill for analyzing text for AI-detection signals, calculating quantitative
-risk scores, and systematically rewriting it to read as naturally human-written.
+risk scores, and systematically rewriting it with surgical precision to read naturally.
+
+## ⚠️ MANDATORY INPUT SANCTITY CONSTRAINTS (CHỐNG SỬA LINH TINH)
+
+- **TIÊU ĐỀ & ĐỀ MỤC LÀ BẤT BIẾN:** Tuyệt đối KHÔNG tự ý đổi tiêu đề bài viết, tên đề tài, tên chương mục. Giữ nguyên 100% từng từ.
+- **ĐÚNG PHẠM VI YÊU CẦU:** Chỉ sửa đúng đoạn/phần người dùng yêu cầu. Tuyệt đối không can thiệp lan man sang các đoạn khác.
+- **BẢO TỒN NỘI DUNG GỐC:** Không thay đổi ý nghĩa, không đổi số liệu, ngày tháng, tên riêng và thuật ngữ chuyên ngành.
+- **SỬA PHẪU THUẬT (Surgical Editing):** Chỉ sửa các câu có lỗi AI (từ nối máy móc, câu quá phẳng, ký tự cấm). Không viết lại bừa bãi toàn bộ bài viết.
+
+---
 
 ## How AI Detectors Work (Brief)
 
 Most detectors (GPTZero, Turnitin, ZeroGPT, Copyleaks) measure:
 
-1. **Perplexity** — how "surprising" the word choices are. AI picks
-   the statistically safest word; humans pick unexpected ones.
+1. **Perplexity** — how "surprising" the word choices are. AI picks the safest words; humans pick unexpected ones.
 2. **Burstiness** — variation in sentence length. AI is flat; humans burst.
-3. **Pattern matching** — known AI phrases, sentence structures, transitions.
-4. **Coherence uniformity** — AI paragraphs are eerily consistent in quality.
+3. **Pattern matching** — known AI phrases, PR buzzwords, transition markers, cliché openers.
+4. **Coherence uniformity** — AI paragraphs are eerily uniform in tone and lack real-world friction/trade-offs.
+
+---
 
 ## Workflow
 
@@ -33,56 +43,49 @@ Run quantitative analysis if Python script is available:
 This measures:
 - Sentence length standard deviation (Burstiness score)
 - Ratio of short/medium/long sentences
-- AI transition word density
+- AI transition word density & PR buzzwords
+- Detection of banned AI symbols (emojis, em dashes, arrows)
 - Calculated Risk Index (0 - 100%)
-
-Or qualitatively inspect:
-- Transition words: Furthermore, Additionally, Bên cạnh đó, Hơn nữa...
-- Flat sentence lengths (all sentences 15-20 words)
-- Parallel enumeration ("Thứ nhất... Thứ hai... Thứ ba...")
-- Generic vocabulary without concrete figures/dates
 
 Report estimated risk level: **Low (<30%) / Medium (30-60%) / High (60-80%) / Very High (>80%)**
 
-### Step 2 — Choose Rewrite Strategy
+### Step 2 — Choose Surgical Rewrite Strategy
 
 Based on risk level, apply the matching strategy from
 `./references/rewrite-strategies.md`:
 
-| Risk Level | Strategy |
-|---|---|
-| Low (<30%) | **Polish** — swap key phrases, vary 2–3 sentences |
-| Medium (30–60%) | **Section Rewrite** — rewrite highest-risk paragraphs |
-| High (60–80%) | **Full Paraphrase** — rewrite all paragraphs, preserve only facts |
-| Very High (>80%) | **Reconstruct** — keep only data/facts, rewrite everything |
+| Risk Level | Strategy | Scope of Editing |
+|---|---|---|
+| Low (<30%) | **Polish** | Swap 2–3 transition words, insert 1 short sentence |
+| Medium (30–60%) | **Surgical Rewrite** | Rewrite only sentences with high AI density |
+| High (60–80%) | **Deep Rephrasing** | Rephrase sentence structures, preserve all facts |
+| Very High (>80%) | **Total Reconstruction** | Rewrite prose completely, but LOCK title, headings & facts |
 
-### Step 3 — Apply Rewrite
+### Step 3 — Apply Rewrite (Strict Scope)
 
 While rewriting, apply these transformations:
 
 **Lexical Changes:**
-- Replace banned words (see `./references/rewrite-strategies.md`)
+- Remove banned words and PR buzzwords (*"bước tiến vượt bậc", "vô cùng tuyệt vời"*)
 - Introduce one unexpected/colloquial word per paragraph
-- Replace round numbers with specific ones where plausible
+- Replace banned symbols (remove emojis, replace arrows with words)
 
 **Syntactic Changes:**
-- Break long sentences into shorter ones (and vice versa — vary it)
-- Change passive constructions to active voice
-- Start some sentences with non-subject elements:
-  - "Từ góc nhìn đó,..."
-  - "Điều đáng chú ý là..."
-  - "Năm 2024, khi..."
+- Break long sentences into shorter ones (and vice versa)
+- Vary sentence openers (avoid always starting with Subject)
+- Introduce real-world friction/trade-offs to ground the analysis
 
-**Structural Changes:**
-- Merge two short paragraphs or split one long one
-- Reorder supporting points within a paragraph
-- Replace a bulleted list with flowing prose (or vice versa — one only)
+**Structural Boundaries:**
+- **DO NOT** re-order sections or change headings
+- **DO NOT** delete user arguments or invent unrequested points
 
 ### Step 4 — Run Self-Checklist
 
-Use `./scripts/checklist.md` (22 criteria) to verify before outputting.
+Use `./scripts/checklist.md` to verify before outputting:
+- [ ] User's title and headings are strictly 100% untouched
+- [ ] No factual data was altered
+- [ ] Only requested sections were modified
 
 ### Step 5 — Output
 
-Present the rewritten text clearly. If significant changes were made,
-briefly note what was changed and why (1–2 sentences max).
+Present the rewritten text clearly. Note what specific sentences were improved and why (1–2 sentences max).
